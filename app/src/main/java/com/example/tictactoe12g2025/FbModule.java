@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class FbModule {
     private Context context;
+    //private GameActivity gameActivity;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
@@ -25,6 +26,7 @@ public class FbModule {
     }
 
     private void initFirebaseListener() {
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

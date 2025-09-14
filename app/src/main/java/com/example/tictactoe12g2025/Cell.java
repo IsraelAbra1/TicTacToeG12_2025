@@ -32,5 +32,24 @@ public class Cell
         p.setStrokeWidth(30);
         p.setStyle(Paint.Style.STROKE);
         canvas.drawRect(x,y,x+cellWith,y+cellWith,p);
+        if(val == Xval)
+            canvas.drawBitmap(bitmapX,x+10,y+10,null);
+        if(val == Oval)
+            canvas.drawBitmap(bitmapO,x+10,y+10,null);
+    }
+
+    public boolean isEmpty() {
+        return val==EmptyVal;
+    }
+
+    public boolean setVal(int val) {
+        if(this.val == EmptyVal)
+        {
+            this.val = val;
+            return true;
+        }
+        return false;
     }
 }
+
+

@@ -16,6 +16,8 @@ public class BoardGame extends View {
 
     private int cellWidth, cellHeight;
     private Context context;
+    private int count = 0;
+
     public BoardGame(Context context) {
         super(context);
         this.context = context;
@@ -56,30 +58,32 @@ public class BoardGame extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        if(event.getAction() == MotionEvent.ACTION_DOWN)
+        float x = event.getX();
+        float y = event.getY();
+        int line = (int) (y/cellWidth);
+        int col = (int)(x/cellHeight);
+        if(line < 3 && col < 3)
         {
-            float x = event.getX();
-            float y = event.getY();
-
-            int line = (int) (y/cellHeight);
-            int col = (int) (x/cellWidth);
-            if(line < 3 && col < 3)
+            // for fb
+            if(arr[line][col].isEmpty() == true)
             {
-                ;
+                ((GameActivity)context).setNewTouch(line,col);
             }
             else
             {
-                Toast.makeText(context, "outside", Toast.LENGTH_SHORT).show();
-                return false;
+                Toast.makeText(getContext(), "not empty", Toast.LENGTH_SHORT).show();
             }
-
-
-            ((GameActivity)context).setNewTouch(0,0);
-
         }
-
-
+        else
+            Toast.makeText(getContext(), "outside", Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    public void setNewValOnBoard(int line, int col) {
+        // this functions calls from GameActivity when new value receive from FB
+        if(arr[line][col].setVal(count) == true)
+            count = 1 - count;
+
+        invalidate();  // clears the canvas and redraws it by call to onDraw()
     }
 }
