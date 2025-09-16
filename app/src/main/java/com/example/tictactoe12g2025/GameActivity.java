@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
         int line = position.getLine();
         int col = position.getCol();
         boardGame.setNewValOnBoard(line,col);
+        // TODO: 16/09/2025  call to isWin() 
 
     }
 

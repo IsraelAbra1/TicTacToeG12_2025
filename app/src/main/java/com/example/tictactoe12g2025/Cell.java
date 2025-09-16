@@ -50,6 +50,10 @@ public class Cell
         }
         return false;
     }
+
+    public int getVal() {
+        return val;
+    }
 }
 
 

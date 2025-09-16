@@ -20,14 +20,14 @@ public class FbModule {
         this.context = context;
 
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance("https://tictactoe12g2025new-default-rtdb.firebaseio.com/");
         reference = firebaseDatabase.getReference("play");
         initFirebaseListener();
     }
 
     private void initFirebaseListener() {
 
-
+        setPositionInFirebase(null);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

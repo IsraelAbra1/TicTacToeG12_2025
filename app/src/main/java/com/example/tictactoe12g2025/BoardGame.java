@@ -42,7 +42,10 @@ public class BoardGame extends View {
             arr = new Cell[3][3];
             for (int line = 0; line < 3; line++) {
                 for (int col = 0; col < 3; col++) {
-                    arr[line][col] = new Cell(line*cellWidth, col*cellHeight,bitmapX,bitmapO,cellWidth);
+                    //arr[line][col] = new Cell(line*cellWidth, col*cellHeight,bitmapX,bitmapO,cellWidth);
+                    // TODO: 14/09/2025  
+                    arr[line][col] = new Cell(col*cellWidth, line*cellHeight,bitmapX,bitmapO,cellWidth);
+
                 }
             }
             isFirstTime = false;
@@ -58,24 +61,28 @@ public class BoardGame extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-        int line = (int) (y/cellWidth);
-        int col = (int)(x/cellHeight);
-        if(line < 3 && col < 3)
+        if(event.getAction() == MotionEvent.ACTION_DOWN)
         {
-            // for fb
-            if(arr[line][col].isEmpty() == true)
+            float x = event.getX();
+            float y = event.getY();
+            int line = (int) (y/cellWidth);
+            int col = (int)(x/cellHeight);
+            if(line < 3 && col < 3)
             {
-                ((GameActivity)context).setNewTouch(line,col);
+                // for fb
+                if(arr[line][col].isEmpty() == true)
+                {
+                    ((GameActivity)context).setNewTouch(line,col);
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "not empty", Toast.LENGTH_SHORT).show();
+                }
             }
             else
-            {
-                Toast.makeText(getContext(), "not empty", Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(getContext(), "outside", Toast.LENGTH_SHORT).show();
         }
-        else
-            Toast.makeText(getContext(), "outside", Toast.LENGTH_SHORT).show();
+
         return false;
     }
 
