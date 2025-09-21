@@ -1,8 +1,6 @@
 package com.example.tictactoe12g2025;
 
 public class GameModule {
-
-
     public static int xWin = 0;
     public static int oWin = 1;
     public static int noWin = 2;
